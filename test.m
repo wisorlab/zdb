@@ -3,6 +3,5 @@ file = './datafiles/BA1216 05_07_2012.zdb';
 
 sql = 'SELECT name, sql FROM sqlite_master WHERE type="table"';
 
-% sql = '.tables';
+tableinfo = mxSQLite3(file,sql);
 
-mxSQLite3(file,sql)

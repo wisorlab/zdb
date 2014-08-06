@@ -119,10 +119,10 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 		rc = sqlite3_exec(db, sql, callback, (void*)vec, &zErrMsg);
 		if ( rc != SQLITE_OK ) mexErrMsgTxt(va_strcat(2,"SQL Error: ", zErrMsg ));
 
+		// assign outputs to a cell array
+		plhs[0] = mxCreateCellMatrix(1,vec->size);
 		for (size_t i = 0; i < vec->size; ++i)
-		{
-			plhs[i] = dictToMxArray((Dict*)getFromVector(vec,i));
-		}
+			mxSetCell(plhs[0],i,dictToMxArray((Dict*)getFromVector(vec,i)));
 	}
 
 
