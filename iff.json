@@ -42,10 +42,10 @@
                 "requires" : ["lib"],
                 "mex" : true,
                 "compiler" : "cc",
-                "source" : [ "dict.c", "vector.c", "mxSQLite3.c" ],
+                "source" : [ "dict.c", "vector.c", "sqlite3_exec.c" ],
                 "include" : [  "./lib/" ],
                 "libs" : [ "sqlite3" ],
-                "target" : "mxSQLite3.mexmaci64"
+                "target" : "sqlite3_exec.mexmaci64"
             }
         }
     }
