@@ -21,10 +21,10 @@
                 "mex" : false,
                 "compiler" : "cc",
                 "flags" : ["-fPIC"],
-                "source" : [ "./lib/sqlite3.c" ],
+                "source" : [ "./src/lib/sqlite3.c" ],
                 "target" : {
                     "type" : "object",
-                    "file" : "./lib/sqlite3.o"
+                    "file" : "./src/lib/sqlite3.o"
                 }
             },
             "lib" : {
@@ -32,20 +32,38 @@
                 "mex" : false,
                 "compiler" : "cc",
                 "flags" : ["-shared"],
-                "source" : [ "./lib/sqlite3.o" ],
+                "source" : [ "./src/lib/sqlite3.o" ],
                 "target" : {
                     "type" : "lib",
-                    "file" : "./lib/libsqlite3.so"
+                    "file" : "./src/lib/libsqlite3.so"
                 }
             },
-            "mxSQLite3" : {
+            "sqlite3_exec" : {
                 "requires" : ["lib"],
                 "mex" : true,
                 "compiler" : "cc",
-                "source" : [ "dict.c", "vector.c", "sqlite3_exec.c" ],
-                "include" : [  "./lib/" ],
+                "source" : [ "./src/dict.c", "./src/vector.c", "./src/sqlite3_exec.c" ],
+                "include" : [  "./src/lib/" ],
                 "libs" : [ "sqlite3" ],
                 "target" : "sqlite3_exec.mexmaci64"
+            },
+            "sqlite3_open" : {
+                "requires" : ["lib"],
+                "mex" : true,
+                "compiler" : "cc",
+                "source" : [ "./src/dict.c", "./src/vector.c", "./src/sqlite3_open.c" ],
+                "include" : [  "./lib/" ],
+                "libs" : [ "sqlite3" ],
+                "target" : "sqlite3_open.mexmaci64"
+            },
+            "sqlite3_close" : {
+                "requires" : ["lib"],
+                "mex" : true,
+                "compiler" : "cc",
+                "source" : [ "./src/dict.c", "./src/vector.c", "./src/sqlite3_close.c" ],
+                "include" : [  "./lib/" ],
+                "libs" : [ "sqlite3" ],
+                "target" : "sqlite3_close.mexmaci64"
             }
         }
     }
