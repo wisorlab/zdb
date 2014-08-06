@@ -1,7 +1,7 @@
 SQLite 3 for Matlab
 ==============
 
-This repository provides Matlab wrappers around the [exec](http://www.sqlite.org/c3ref/exec.html) function of SQLite 3's C API.  This allows you to execute SQLite queries on an embedded database.
+This repository provides Matlab wrappers around some basic functions of SQLite 3's C API.  This allows you to execute SQLite queries on an embedded database.
 
 
 SQLite is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. SQLite is the most widely deployed SQL database engine in the world. The source code for SQLite is in the public domain.
@@ -51,7 +51,7 @@ result = sqlite3_exec( db, sql );
 
 The variable 'result' will be a cell array of structs.  Each key-value pair in of these struct corresponds to a column name and value returned from the SQL table:
 
-```
+```matlab
 result{1}
 
 {
@@ -62,7 +62,7 @@ result{1}
 ```
 Now that the table names are known, you could then issue the following query to see the contents of the table:
 
-```
+```matlab
 
 sql2 = 'PRAGMA table_info(table_name)';
 result2 = sqlite3_exec( db, sql2 );
