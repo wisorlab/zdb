@@ -1,0 +1,52 @@
+{
+    "name": "mxSQLite3",
+    "author": "Jon Brennecke",
+    "description": "execute SQLite3 queries from Matlab",
+    "version": "0.0.0",
+    "repository": "",
+    "main": "main.m",
+    "dependencies": [
+        ""
+    ],
+    "keywords": [
+        ""
+    ],
+    "build" : {
+        "compiler" : {
+            "cc" : "gcc",
+            "cflags" : ["-std=c11","-Wall"]
+        },
+        "rules" : {
+            "lib-obj" : {
+                "mex" : false,
+                "compiler" : "cc",
+                "flags" : ["-fPIC"],
+                "source" : [ "./lib/sqlite3.c" ],
+                "target" : {
+                    "type" : "object",
+                    "file" : "./lib/sqlite3.o"
+                }
+            },
+            "lib" : {
+                "requires" : [ "lib-obj" ],
+                "mex" : false,
+                "compiler" : "cc",
+                "flags" : ["-shared"],
+                "source" : [ "./lib/sqlite3.o" ],
+                "target" : {
+                    "type" : "lib",
+                    "file" : "./lib/libsqlite3.so"
+                }
+            },
+            "mxSQLite3" : {
+                "requires" : ["lib"],
+                "mex" : true,
+                "compiler" : "cc",
+                "source" : [ "dict.c", "vector.c", "mxSQLite3.c" ],
+                "include" : [  "./lib/" ],
+                "libs" : [ "sqlite3" ],
+                "target" : "mxSQLite3.mexmaci64"
+            }
+        }
+    }
+}

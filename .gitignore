@@ -1,0 +1,4 @@
+datafiles/*
+*.out
+*.o
+*.so
