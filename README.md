@@ -8,11 +8,13 @@ SQLite is a software library that implements a self-contained, serverless, zero-
 
 
 ###install
+ 
 
 The API is written in C and will need to be compiled for your platform. The program [iff](elseiff.com) makes this easy. With iff installed, run ```iff build``` in the root of the repository.
 
 
 ###usage
+ 
 
 The main function is 'sqlite3_exec' which takes the following syntax: 
 
@@ -21,6 +23,7 @@ cellArray = sqlite3_exec( pathToDB, sqlQuery );
 ```
 
 ### examples
+ 
 
 To query basic information about a database, you could use a query such as:
 
