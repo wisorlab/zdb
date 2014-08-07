@@ -45,7 +45,7 @@
                 "source" : [ "./src/dict.c", "./src/vector.c", "./src/sqlite3_exec.c" ],
                 "include" : [  "./src/lib/" ],
                 "libs" : [ "sqlite3" ],
-                "target" : "sqlite3_exec.mexmaci64"
+                "target" : "+build/sqlite3_exec.mexmaci64"
             },
             "sqlite3_open" : {
                 "requires" : ["lib"],
@@ -54,7 +54,7 @@
                 "source" : [ "./src/dict.c", "./src/vector.c", "./src/sqlite3_open.c" ],
                 "include" : [  "./lib/" ],
                 "libs" : [ "sqlite3" ],
-                "target" : "sqlite3_open.mexmaci64"
+                "target" : "+build/sqlite3_open.mexmaci64"
             },
             "sqlite3_close" : {
                 "requires" : ["lib"],
@@ -63,7 +63,7 @@
                 "source" : [ "./src/dict.c", "./src/vector.c", "./src/sqlite3_close.c" ],
                 "include" : [  "./lib/" ],
                 "libs" : [ "sqlite3" ],
-                "target" : "sqlite3_close.mexmaci64"
+                "target" : "+build/sqlite3_close.mexmaci64"
             }
         }
     }

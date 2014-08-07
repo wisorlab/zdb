@@ -17,14 +17,14 @@
 function setScore( file, new_scores )
 
 	% open the SQLite database
-	db = sqlite3_open( file );
+	db = build.sqlite3_open( file );
 
 	% conversion lookup tables
 	lookup_name = {'Sleep-Wake','Sleep-SWS','Sleep-Paradoxical'};
 	lookup_key = {'W','S','R'};
 
 	% select all the scoring keys from the db
-	rows = sqlite3_exec(db,'SELECT type FROM temporary_scoring_marker;');
+	rows = build.sqlite3_exec(db,'SELECT type FROM temporary_scoring_marker;');
 
 	% throw an error if the lengths don't match
 	% TODO - we could do something else here, like only write the first n rows
@@ -41,11 +41,11 @@ function setScore( file, new_scores )
 
 		% update the scoring keys
 		% sqlite3_exec(db,['UPDATE temporary_scoring_marker WHERE id=' i ' SET type="' score '";']);
-		sqlite3_exec(db,['UPDATE temporary_scoring_marker SET type="' score '" WHERE id=' num2str(i) ';']);
+		build.sqlite3_exec(db,['UPDATE temporary_scoring_marker SET type="' score '" WHERE id=' num2str(i) ';']);
 	end
 
 	% close the db
-	sqlite3_close(db);
+	build.sqlite3_close(db);
 end
 
 

@@ -18,14 +18,14 @@
 function [ scores, rows ] = getScore( file )
 
 	% open the SQLite database
-	db = sqlite3_open( file );
+	db = build.sqlite3_open( file );
 
 	% conversion lookup tables
 	lookup_name = {'Sleep-Wake','Sleep-SWS','Sleep-Paradoxical'};
 	lookup_key = {'W','S','R'};
 
 	% select all the scoring keys from the DB
-	rows = sqlite3_exec(db,'SELECT type FROM temporary_scoring_marker;');
+	rows = build.sqlite3_exec(db,'SELECT type FROM temporary_scoring_marker;');
 
 	% make a cell to store the outputs
 	scores = cell(length(rows),1);
@@ -40,5 +40,5 @@ function [ scores, rows ] = getScore( file )
 	end
 
 	% close the db
-	sqlite3_close(db);
+	build.sqlite3_close(db);
 end
