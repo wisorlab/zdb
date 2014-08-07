@@ -15,7 +15,7 @@
 % This function retrieves all the scoring keys from a given 'ZDB' file
 % 
 
-function [ scores, rows ] = getScore( file )
+function [ scores, rows ] = zdb_get_score( file )
 
 	% open the SQLite database
 	db = build.sqlite3_open( file );

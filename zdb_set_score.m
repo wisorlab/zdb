@@ -14,7 +14,7 @@
 % 
 % This function sets all the scoring keys in a given 'ZDB' file
 % 
-function setScore( file, new_scores )
+function zdb_set_score( file, new_scores )
 
 	% open the SQLite database
 	db = build.sqlite3_open( file );

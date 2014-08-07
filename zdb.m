@@ -1,1 +1,0 @@
-funtion zdb('./datafiles/test_edf_convert.zdb')
