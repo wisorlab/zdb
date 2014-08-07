@@ -18,9 +18,15 @@
 #include <string.h>
 #include <stdarg.h>
 
+// verify the integrity of the pointer by checking its signature on recreation
 #define CLASS_HANDLE_SIGNATURE 0xFF00F0A5
 
-
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Handle allows persistent integrity of a C pointer between multiple functin calls
+ * by cast a C pointer into a Matlab mxArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 typedef struct mxHandle
 {
 	void* ptr;
@@ -28,7 +34,11 @@ typedef struct mxHandle
 
 } mxHandle;
 
-
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * create a Handle object from a C pointer
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 mxHandle* createHandle ( void* ptr )
 {
 	mxHandle* handle = (mxHandle*)malloc(sizeof(mxHandle));
@@ -37,17 +47,23 @@ mxHandle* createHandle ( void* ptr )
 	return handle;
 }
 
-
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * convert between a Handle object and an mxArray
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 static inline mxArray* convertHandleToMat( mxHandle* handle )
 {
-	// mexLock();
 	mxArray *mx = mxCreateNumericMatrix(1, 1, mxUINT64_CLASS, mxREAL);
 	*((uint64_t*)mxGetData(mx)) = (uint64_t)(handle->ptr);
 	return mx;
 }
 
-// static inline int 
-
+/**
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * convert between a Matlab mxArray and a Handle object
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
 static inline mxHandle* convertMatToHandle( const mxArray *mx )
 {
     if (mxGetNumberOfElements(mx) != 1 || mxGetClassID(mx) != mxUINT64_CLASS || mxIsComplex(mx))
@@ -58,31 +74,6 @@ static inline mxHandle* convertMatToHandle( const mxArray *mx )
     return handle;
 }
 
-
-
-/**
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* convert a C pointer to an mxArray
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-static inline mxArray* ptrToMxArray( void* ptr )
-{
-	mxArray *mx = mxCreateNumericMatrix(1, 1, mxUINT64_CLASS, mxREAL);
-	*((uint64_t*)mxGetData(mx)) = (uint64_t)ptr;
-	return mx;
-}
-
-/**
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* convert an mxArray to a C pointer 
-* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-static inline void* mxArrayToPtr( const mxArray* mx )
-{
-	if (mxGetNumberOfElements(mx) != 1 || mxGetClassID(mx) != mxUINT64_CLASS || mxIsComplex(mx))
-        mexErrMsgTxt("Input must be a real uint64 scalar.");
-	return mxGetData(mx);
-}
 
 /**
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
