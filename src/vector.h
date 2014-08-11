@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdarg.h>
+#include <stdint.h>
 
 typedef enum 
 {
@@ -23,7 +24,7 @@ typedef enum
 
 } typesize_t;
 
-#define VECTOR_INDEX(n,i) ((void *) (n)->elems + ((n)->elem_size * (i)))
+#define VECTOR_INDEX(n,i) ((char *) (n)->elems + ((n)->elem_size * (i)))
 
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

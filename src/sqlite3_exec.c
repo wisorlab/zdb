@@ -2,7 +2,7 @@
 #include "mexutilsc.h"
 #include "dict.h"
 #include "vector.h"
-#include <sqlite3.h>
+#include "./lib/sqlite3.h"
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
@@ -38,7 +38,7 @@ static int callback(void* vec, int argc, char** argv, char** azColName)
 	// create a dictionary to fit the SQL query results
 	Dict* d = createDict(argc);
 
-	for(size_t i = 0; i < argc; ++i)
+	for(int i = 0; i < argc; ++i)
 		dictSetKeyAndValue( (Dict*)d, i, (char*)azColName[i], (char*)(argv[i] ? argv[i] : "NULL"));
 
 	pushToVector((Vector*)vec,d);
@@ -89,4 +89,10 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 	// free memory, close the db and return
 	sqlite3_free(zErrMsg);
 	mxFree((char*)sql);
+}
+
+// for Visual Studio
+int main(void)
+{
+	return 0;
 }

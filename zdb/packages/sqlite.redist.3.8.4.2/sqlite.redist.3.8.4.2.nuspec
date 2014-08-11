@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>sqlite.redist</id>
+    <version>3.8.4.2</version>
+    <title>sqlite Redist</title>
+    <authors>SQLite Consortium</authors>
+    <owners>SQLite Consortium</owners>
+    <licenseUrl>http://www.sqlite.org/copyright.html</licenseUrl>
+    <projectUrl>http://www.sqlite.org/</projectUrl>
+    <iconUrl>http://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Sqlite-square-icon.svg/256px-Sqlite-square-icon.svg.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Redistributable components for package 'sqlite'. This package should only be installed as a dependency. 
+(This is not the package you are looking for).</description>
+    <summary>Redistributable components for for package 'sqlite'</summary>
+    <releaseNotes>The code changes that resulted in the performance improvements in version 3.8.4 missed a single buffer overflow test, which could result in a read past the end of a buffer while searching a database that is corrupted in a particular way. Version 3.8.4.2 fixes that problem using a one-line patch.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>sqlite database embedded sql native nativepackage</tags>
+  </metadata>
+</package>

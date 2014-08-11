@@ -8,6 +8,7 @@
 #define MEXUTILSC_H
 
 #include <stdlib.h>
+#include <stdint.h>
 
 // for some reason char16_t fails to be defined in clang
 // TODO test for osx here
@@ -52,10 +53,10 @@ mxHandle* createHandle ( void* ptr )
  * convert between a Handle object and an mxArray
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-static inline mxArray* convertHandleToMat( mxHandle* handle )
+static __inline mxArray* convertHandleToMat( mxHandle* handle )
 {
 	mxArray *mx = mxCreateNumericMatrix(1, 1, mxUINT64_CLASS, mxREAL);
-	*((uint64_t*)mxGetData(mx)) = (uint64_t)(handle->ptr);
+	*((uintptr_t*)mxGetData(mx)) = (uintptr_t)(handle->ptr);
 	return mx;
 }
 
@@ -64,11 +65,11 @@ static inline mxArray* convertHandleToMat( mxHandle* handle )
  * convert between a Matlab mxArray and a Handle object
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-static inline mxHandle* convertMatToHandle( const mxArray *mx )
+static __inline mxHandle* convertMatToHandle( const mxArray *mx )
 {
     if (mxGetNumberOfElements(mx) != 1 || mxGetClassID(mx) != mxUINT64_CLASS || mxIsComplex(mx))
         mexErrMsgTxt("Input must be a real uint64 scalar.");
-    mxHandle* handle = createHandle((void*)*((uint64_t *)mxGetData(mx)));
+	struct mxHandle* handle = createHandle((void*)*((uintptr_t *)mxGetData(mx)));
     if (handle->signature != CLASS_HANDLE_SIGNATURE)
         mexErrMsgTxt("Handle not valid.");
     return handle;
@@ -81,7 +82,7 @@ static inline mxHandle* convertMatToHandle( const mxArray *mx )
 * an mxArray into the memory addressed by 'out'
 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-static inline void memcpyToMxArray( const mxArray* mx, void* out, int size )
+static __inline void memcpyToMxArray( const mxArray* mx, void* out, int size )
 {
 	memcpy( out, (void*)mxGetData(mx), (int)size );
 }
@@ -96,7 +97,7 @@ static inline void memcpyToMxArray( const mxArray* mx, void* out, int size )
  * concat any number of strings using variadic argument lists
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-static inline char* va_strcat( size_t argc, ... )
+static __inline char* va_strcat( const size_t argc, ... )
 {
 	va_list args;
 	va_start(args, argc);
@@ -104,19 +105,22 @@ static inline char* va_strcat( size_t argc, ... )
 	va_copy(args2,args);
 
 	size_t size = 1;
-	char format[argc*2];
+	char* format = malloc(argc * 2 * sizeof(char));
 
 	// calculate the length of the output buffer by summing all the strings
-	for (size_t i = 0, j = 0; i < argc; ++i, j=i*2) 
+	for (size_t i = 0, j = 0; i < argc; ++i, j = i * 2)
 	{
-		size += strlen(va_arg( args, char*));
-		format[j] = '%'; format[j+1] = 's';
+		size += strlen(va_arg(args, char*));
+		format[j] = '%'; format[j + 1] = 's';
 	}
 
 	// allocate a buffer of size
-	char* buf = (char*)malloc( sizeof(char) * size );
+	char* buf = (char*)malloc(sizeof(char)* size);
+	// vsnprintf_s(buf, size, size, format, args2);
 	vsnprintf(buf,size,format,args2);
 	va_end(args);
+
+
 	return buf;
 }
 

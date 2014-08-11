@@ -58,10 +58,10 @@ extern void dictSetKeyAndValue( Dict* d, size_t i, char* key, char* value )
 {
 	// set value
 	d->values[i] = (char*)malloc(strlen(value));
-	strcpy(d->values[i],value);
+	memcpy(d->values[i], value, strlen(value) * sizeof(char));
 
 	// set key
 	d->keys[i] = (char*)malloc(strlen(value));
-	strcpy(d->keys[i],key);
+	memcpy(d->keys[i], key, strlen(key) * sizeof(char));
 }
 
