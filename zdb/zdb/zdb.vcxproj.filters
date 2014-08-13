@@ -27,6 +27,9 @@
     <ClCompile Include="..\..\src\vector.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\sqlite3_open.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\lib\sqlite3.h">
@@ -108,5 +111,8 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="sqlite3_open.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

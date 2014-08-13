@@ -6,7 +6,8 @@ sqlite_flags = -shared
 sqlite_dir = lib/
 src_dir = src/
 
-bld_dir = +build/
+# bld_dir = +build/
+bld_dir = 
 
 mex_flags = -DMATLAB_MEX_FILE -shared
 mex_dep_files = dict vector
@@ -27,7 +28,7 @@ all: mex
 sqlite:
 	$(cc) $(cflags) $(sqlite_flags) -c $(src_dir)$(sqlite_dir)$(sqlite).c -o $(src_dir)$(sqlite_dir)$(sqlite)$(sqlite_ext)
 
-mex:
+mex: 
 	$(foreach mex_file, $(mex_src), \
 		$(cc) $(cflags) $(mex_flags) $(mex_deps) $(mex_file) -o $(subst $(src_dir), $(bld_dir), \
 		$(subst .c,$(mex_ext),$(mex_file))) $(matlab_lib) $(matlab_inc) $(mex_libs) &)

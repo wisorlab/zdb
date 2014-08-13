@@ -21,7 +21,7 @@
  * 		:param prhs - neuron of input arguments.
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 	sqlite3 *db;
 
@@ -42,10 +42,4 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 
 	// free memory and return
 	mxFree((char*)file);
-}
-
-// for Visual Studio
-int main(void)
-{
-	return 0;
 }

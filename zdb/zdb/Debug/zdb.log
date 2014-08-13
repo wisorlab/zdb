@@ -1,13 +1,10 @@
-﻿Build started 8/11/2014 9:59:09 AM.
+﻿Build started 8/13/2014 12:43:50 PM.
      1>Project "C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\zdb\zdb.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\packages\sqlite.3.8.4.2\build\native\../..//build/native/include/ /I"C:\Program Files (x86)\MATLAB\R2010a Student\extern\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ..\..\src\sqlite3_close.c
-         sqlite3_close.c
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\brennecke.jonathan\Documents\GitHub\zdb\sqlite3\Debug /LIBPATH:"C:\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft" C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\packages\sqlite.3.8.4.2\build\native\../..//build/native/lib/Win32\Debug\sqlite3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.lib" /MACHINE:X86 Debug\zdb.res
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.mexw32" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\brennecke.jonathan\Documents\GitHub\zdb\sqlite3\Debug /LIBPATH:"C:\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft" C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\packages\sqlite.3.8.4.2\build\native\../..//build/native/lib/Win32\Debug\sqlite3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:"sqlite3_open.def" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.lib" /MACHINE:X86 /export:mexFunction /DLL Debug\zdb.res
          Debug\dict.obj
          Debug\vector.obj
-         Debug\sqlite3_close.obj
+         Debug\sqlite3_open.obj
          "..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libemlrt.lib"
          "..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libeng.lib"
          "..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libfixedpoint.lib"
@@ -23,10 +20,12 @@
          "..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmx.lib"
          "..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libut.lib"
          "..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\rtwcg.lib"
-         LINK : C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.exe not found or not built by the last incremental link; performing full link
-         zdb.vcxproj -> C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.exe
+         LINK : C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.mexw32 not found or not built by the last incremental link; performing full link
+            Creating library C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.lib and object C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.exp
+     1>zdb.exp : warning LNK4070: /OUT:sqlite3_open.mexwin32 directive in .EXP differs from output filename 'C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.mexw32'; ignoring directive
+         zdb.vcxproj -> C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\Debug\zdb.mexw32
      1>Done Building Project "C:\Users\brennecke.jonathan\Documents\GitHub\zdb\zdb\zdb\zdb.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.53
+Time Elapsed 00:00:00.34

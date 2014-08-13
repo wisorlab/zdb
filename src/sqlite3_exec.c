@@ -35,13 +35,17 @@ mxArray* dictToMxArray( Dict* d )
  */
 static int callback(void* vec, int argc, char** argv, char** azColName)
 {
+
+	mexPrintf((char*)vec);
+
+
 	// create a dictionary to fit the SQL query results
-	Dict* d = createDict(argc);
+	// Dict* d = createDict(argc);
 
-	for(int i = 0; i < argc; ++i)
-		dictSetKeyAndValue( (Dict*)d, i, (char*)azColName[i], (char*)(argv[i] ? argv[i] : "NULL"));
+	// for(int i = 0; i < argc; ++i)
+	// 	dictSetKeyAndValue( (Dict*)d, i, (char*)azColName[i], (char*)(argv[i] ? argv[i] : "NULL"));
 
-	pushToVector((Vector*)vec,d);
+	// pushToVector((Vector*)vec,d);
 
 	return 0;
 }
@@ -73,16 +77,20 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 	if ( db )
 	{
 		// vector of dictionaries
-		Vector* vec = createVector( 0, DICT );
+		// Vector* vec = createVector( 0, DICT );
+		char* test = "hello world";
+
+		// mexPrintf(sql);
+
 
 		// Execute SQL statement
-		rc = sqlite3_exec(db, sql, callback, (void*)vec, &zErrMsg);
-		if ( rc != SQLITE_OK ) mexErrMsgTxt(va_strcat(2,"SQL Error: ", zErrMsg ? zErrMsg : "NULL" ));
+		rc = sqlite3_exec(db, sql, callback, (void*)test, &zErrMsg);
+		// if ( rc != SQLITE_OK ) mexErrMsgTxt(va_strcat(2,"SQL Error: ", zErrMsg ? zErrMsg : "NULL" ));
 
-		// assign outputs to a cell array
-		plhs[0] = mxCreateCellMatrix(1,vec->size);
-		for (size_t i = 0; i < vec->size; ++i)
-			mxSetCell(plhs[0],i,dictToMxArray((Dict*)getFromVector(vec,i)));
+		// // assign outputs to a cell array
+		// plhs[0] = mxCreateCellMatrix(1,vec->size);
+		// for (size_t i = 0; i < vec->size; ++i)
+		// 	mxSetCell(plhs[0],i,dictToMxArray((Dict*)getFromVector(vec,i)));
 	}
 	else mexErrMsgTxt("Error accessing the database.");
 

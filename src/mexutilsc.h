@@ -7,6 +7,14 @@
 #ifndef MEXUTILSC_H
 #define MEXUTILSC_H
 
+#ifndef MATLAB_MEX_FILE
+	#define MATLAB_MEX_FILE
+#endif
+
+#ifdef _MSC_VER
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include <stdlib.h>
 #include <stdint.h>
 
