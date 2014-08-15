@@ -13,7 +13,7 @@
     ],
     "build" : {
         "compiler" : {
-            "cc" : "gcc",
+            "cc" : "/usr/local/i386-mingw32-4.3.0/bin/i386-mingw32-gcc",
             "cflags" : ["-std=c11","-Wall"]
         },
         "rules" : {

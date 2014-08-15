@@ -2,3 +2,5 @@ datafiles/*
 *.out
 *.o
 *.so
+*.zdb
+*.txt
