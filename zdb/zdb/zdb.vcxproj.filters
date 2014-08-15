@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\dict.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sqlite3_close.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sqlite3_exec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\vector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sqlite3_open.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\lib\sqlite3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\lib\sqlite3ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\dict.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\mexutilsc.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\vector.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\include\mex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libemlrt.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libeng.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libfixedpoint.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmat.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmex.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmwblas.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmwblascompat32.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmwlapack.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmwmathutil.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmwservices.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmwsl_fileio.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmwsl_solver_rtw.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libmx.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\libut.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+    <Library Include="..\..\..\..\..\..\..\Program Files (x86)\MATLAB\R2010a Student\extern\lib\win32\microsoft\rtwcg.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="zdb.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\lib\sqlite3.dll">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="packages.config" />
+    <None Include="sqlite3_open.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

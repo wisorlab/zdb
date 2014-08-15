@@ -2,5 +2,9 @@ datafiles/*
 *.out
 *.o
 *.so
+<<<<<<< HEAD
 *.zdb
 *.txt
+=======
+*.dll
+>>>>>>> 46f7ac1b56bfa46e92d6cf290408ad5fadef1b4e

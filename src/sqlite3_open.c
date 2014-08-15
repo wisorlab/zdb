@@ -1,7 +1,7 @@
-#include "mexutilsc.h"
+#include "mexutils.h"
 #include "dict.h"
 #include "vector.h"
-#include <sqlite3.h>
+#include "./lib/sqlite3.h"
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
@@ -21,9 +21,12 @@
  * 		:param prhs - neuron of input arguments.
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
-void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
 	sqlite3 *db;
+
+	if ( !nrhs )
+		mexErrMsgTxt("SQLite3: Error: sqlite3_open requires a filename as an input argument.");
 
 	// the first (and only) parameter is a string designating the file path
 	const char* file = mxArrayToString(prhs[0]);

@@ -21,8 +21,16 @@ extern Vector* createVector( size_t size, typesize_t elem_size )
 	// make sure it worked!
 	assert(n->elems != NULL);
 
+<<<<<<< HEAD
 	return n;
 }
+=======
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <stdarg.h>
+#include <stdint.h>
+>>>>>>> 46f7ac1b56bfa46e92d6cf290408ad5fadef1b4e
 
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,6 +97,10 @@ extern void resizeVector( Vector* n, size_t newsize )
 	n->size = newsize;
 }
 
+<<<<<<< HEAD
+=======
+#define VECTOR_INDEX(n,i) ((char *) (n)->elems + ((n)->elem_size * (i)))
+>>>>>>> 46f7ac1b56bfa46e92d6cf290408ad5fadef1b4e
 
 /**
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

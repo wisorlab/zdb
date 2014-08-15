@@ -1,7 +1,7 @@
-#include "mexutilsc.h"
+#include "mexutils.h"
 #include "dict.h"
 #include "vector.h"
-#include <sqlite3.h>
+#include "./lib/sqlite3.h"
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
@@ -34,4 +34,10 @@ void mexFunction ( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 		sqlite3_close(db);
 	}
 	else mexErrMsgTxt("Error accessing the database.");
+}
+
+// for Visual Studio
+int main(void)
+{
+	return 0;
 }
