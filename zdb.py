@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 
 # $$$$$$$$\ $$$$$$$\  $$$$$$$\  
@@ -15,14 +17,12 @@
 # 
 
 
-import csv
-import sqlite3
-import contextlib
+import csv, sqlite3, contextlib, sys, argparse
 
 
 class ZDB(object):
 
-	"""Neuroscore database manager"""
+	"""Neuroscore database thingy"""
 
 	def __init__(self, zdbfile):
 		self.file = zdbfile
@@ -96,6 +96,7 @@ class ZDB(object):
 			raise Warning('key ' + name + ' did not match any known keys.')
 			return None
 
+	# save and close the zdb
 	def close(self) :
 		self.db.commit()
 		self.db.close()
@@ -111,38 +112,30 @@ def getScoreFromText( txt ) :
 		return scores[2:]
 
 
-class TimeStamp(object):
+# class TimeStamp(object):
 
-	"""docstring for TimeStamp"""
+# 	"""docstring for TimeStamp"""
 
-	def __init__( self, zdb_ts=634677840000000000, txt_ts='03/19/2012,20:00:00 PM' ):
-		self.zdbts = zdbts;
+# 	def __init__( self, zdb_ts=634677840000000000, txt_ts='03/19/2012,20:00:00 PM' ):
+# 		self.zdbts = zdbts;
 		
 
 
 if __name__ == '__main__':
 
-	# zdbfile = 'BA1211_2.zdb'
-	zdbfile = 'BA1211_1.zdb'
-	txtfile = 'BA-1211human_scored_marked.txt'
-	# txtfile = 'BA-1211human_scored_marked.txt'
+	# parse arguments
+	parser = argparse.ArgumentParser(description='Read and write data to a ZDB file.')
+	parser.add_argument('-zdb', dest='zdbfile', type=str, help='the ZDB database file')
+	parser.add_argument('-txt', dest='txtfile', type=str, help='the TXT file')
+	args = parser.parse_args(sys.argv[1:])
 
-	zdb = ZDB(zdbfile)
+	zdb = ZDB(args.zdbfile)
 	zdb.open()
 
-	autoscores = getScoreFromText(txtfile)
+	autoscores = getScoreFromText(args.txtfile)
 	# zdbscores = zdb.scores
-	# print autoscores
+	print autoscores
 	zdb.scores = autoscores
-	# zdb.scores = ['R','R','R']
-
-	# print zdbscores[0:5]
-
-	# print autoscores[0:5]
-
-	# print len(autoscores[2:len(autoscores)])
-	# print len(zdb.scores)
-	# zdb.scores = autoscores
 
 	zdb.close()
 	
