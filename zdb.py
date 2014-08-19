@@ -15,14 +15,20 @@
 # USAGE:
 # some python functions to set and retrieve scores from a ZDB file
 # 
+# by @jonbrennecke / github.com/jonbrennecke
+# 
+# 
 
-
-import csv, sqlite3, contextlib, sys, argparse
+import csv, sqlite3, contextlib, sys, argparse, datetime, time, calendar
 
 
 class ZDB(object):
 
-	"""Neuroscore database thingy"""
+	"""
+
+	Neuroscore database thingy
+
+	"""
 
 	def __init__(self, zdbfile):
 		self.file = zdbfile
@@ -55,14 +61,25 @@ class ZDB(object):
 			self.open()
 			return self.scores
 
+	# convert the scoretime from a TXT file into into .Net ticks 
+	# (number of 100 nano second incrememnts since Jan 1, 0001 )
+	# 
+	# can be reversed by:
+	# print (datetime.datetime(1,1,1) + datetime.timedelta(microseconds=ticks/10))
+	def convertScoretimeToTicks(self,scoretime) :
+		unixepoch = int((datetime.datetime(1970, 1, 1, 0, 0, 0) - datetime.datetime(1, 1, 1, 0, 0, 0)).total_seconds()) * (10 ** 7)
+		tup = datetime.datetime.strptime(scoretime, "%m/%d/%Y,%H:%M:%S %p" ).timetuple()
+		return int(calendar.timegm(tup) * (10**7)) + unixepoch
+
 	# convert the ZDB scoring keys to single character values
 	@scores.setter
 	def scores(self,newscores) :
 		c = self.db.cursor()
-		for i, char in enumerate(newscores) :
+		for i, (time,char) in enumerate(newscores) :
 			score = self.convertCharToName(char) 
-			c.execute('UPDATE temporary_scoring_marker SET type=\"'+score+'\" WHERE id='+unicode(i+1)+';')
-			# self.db.commit()
+			ticks = self.convertScoretimeToTicks(newscores[i][0])
+			c.execute('UPDATE temporary_scoring_marker SET type=\"'+score+'\" WHERE starts_at='+unicode(ticks)+';')
+			# c.execute('UPDATE temporary_scoring_marker SET type=\"'+score+'\" WHERE id='+unicode(i+1)+';')
 			
 	# takes a single character in ['W','S','R','X'] and converts it to 
 	# a corresponding representation in ZDB's string format
@@ -100,17 +117,24 @@ class ZDB(object):
 	def close(self) :
 		self.db.commit()
 		self.db.close()
+		
 
-# get the score field from a text file
+# get the timestamp and score field from a text file
 def getScoreFromText( txt ) :
 	with open(txt) as f :
 		scores = []
 		reader = csv.reader(f,delimiter='\t')
 		for cell in reader :
-			scores.append(cell[1])
+			scores.append(cell[0:2])
 
 		return scores[2:]
 
+# class Textfile(object):
+
+# 	"""docstring for Textfile"""
+
+# 	def __init__(self, arg):
+# 		self.arg = arg
 
 # class TimeStamp(object):
 
@@ -133,8 +157,7 @@ if __name__ == '__main__':
 	zdb.open()
 
 	autoscores = getScoreFromText(args.txtfile)
-	# zdbscores = zdb.scores
-	print autoscores
+
 	zdb.scores = autoscores
 
 	zdb.close()
