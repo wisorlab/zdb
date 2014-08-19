@@ -1,4 +1,4 @@
-Read Neuroscore ZDB files in Matlab
+Read Neuroscore ZDB files
 ==============
 
 Neuroscore's ZDB files are just SQLite 3 databases with an '.zdb' file extension.
