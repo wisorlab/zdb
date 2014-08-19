@@ -18,8 +18,8 @@
 # by @jonbrennecke / github.com/jonbrennecke
 # 
 # 
-
-import csv, sqlite3, contextlib, sys, argparse, datetime, time, calendar
+from zdbutils import *
+import csv, sqlite3, contextlib, sys, argparse
 
 
 class ZDB(object):
@@ -56,62 +56,21 @@ class ZDB(object):
 		if self.db :
 			c = self.db.cursor()
 			c.execute("SELECT type FROM temporary_scoring_marker;")
-			return [ self.convertNameToChar(score) for score in c.fetchall() ]
+			return [ convertNameToChar(score) for score in c.fetchall() ]
 		else :
 			self.open()
 			return self.scores
-
-	# convert the scoretime from a TXT file into into .Net ticks 
-	# (number of 100 nano second incrememnts since Jan 1, 0001 )
-	# 
-	# can be reversed by:
-	# print (datetime.datetime(1,1,1) + datetime.timedelta(microseconds=ticks/10))
-	def convertScoretimeToTicks(self,scoretime) :
-		unixepoch = int((datetime.datetime(1970, 1, 1, 0, 0, 0) - datetime.datetime(1, 1, 1, 0, 0, 0)).total_seconds()) * (10 ** 7)
-		tup = datetime.datetime.strptime(scoretime, "%m/%d/%Y,%H:%M:%S %p" ).timetuple()
-		return int(calendar.timegm(tup) * (10**7)) + unixepoch
 
 	# convert the ZDB scoring keys to single character values
 	@scores.setter
 	def scores(self,newscores) :
 		c = self.db.cursor()
 		for i, (time,char) in enumerate(newscores) :
-			score = self.convertCharToName(char) 
-			ticks = self.convertScoretimeToTicks(newscores[i][0])
-			c.execute('UPDATE temporary_scoring_marker SET type=\"'+score+'\" WHERE starts_at='+unicode(ticks)+';')
-			# c.execute('UPDATE temporary_scoring_marker SET type=\"'+score+'\" WHERE id='+unicode(i+1)+';')
-			
-	# takes a single character in ['W','S','R','X'] and converts it to 
-	# a corresponding representation in ZDB's string format
-	def convertCharToName(self,char) :
-		if char == 'W' :
-			return u'Sleep-Wake'
-		elif char == 'S' :
-			return u'Sleep-SWS'
-		elif char == 'R' :
-			return u'Sleep-Paradoxical'
-		elif char == 'X' :
-			return u'Sleep-Artifact'
-		elif char == '' :
-			return u'Sleep-Artifact'
-		else:
-			raise Warning('key ' + char + ' did not match any known names.')
-			return None
-
-	# takes a single character in ZDB's string format and converts it to 
-	# a corresponding single-character representation
-	def convertNameToChar(self,name) :
-		if name == (u'Sleep-Wake',) :
-			return 'W'
-		elif name == (u'Sleep-SWS',) or name == (u'Sleep-SWS1',) :
-			return 'S'
-		elif name == (u'Sleep-Paradoxical',) :
-			return 'R'
-		elif name == (u'Sleep-Artifact',) :
-			return 'X'
-		else:
-			raise Warning('key ' + name + ' did not match any known keys.')
-			return None
+			score = convertCharToName(char) 
+			ticks = convertScoretimeToTicks(newscores[i][0])
+			c.execute('UPDATE temporary_scoring_marker SET type=\"'+score+'\" WHERE starts_at='+str(ticks)+';')
+			if c.rowcount == 0 :
+				print Warning("'UPDATE' failed to set score at timestamp: "+convertTicksToScoretime(ticks))
 
 	# save and close the zdb
 	def close(self) :
@@ -128,21 +87,6 @@ def getScoreFromText( txt ) :
 			scores.append(cell[0:2])
 
 		return scores[2:]
-
-# class Textfile(object):
-
-# 	"""docstring for Textfile"""
-
-# 	def __init__(self, arg):
-# 		self.arg = arg
-
-# class TimeStamp(object):
-
-# 	"""docstring for TimeStamp"""
-
-# 	def __init__( self, zdb_ts=634677840000000000, txt_ts='03/19/2012,20:00:00 PM' ):
-# 		self.zdbts = zdbts;
-		
 
 
 if __name__ == '__main__':
