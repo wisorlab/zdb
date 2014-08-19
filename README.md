@@ -3,11 +3,16 @@ Read Neuroscore ZDB files in Matlab
 
 Neuroscore's ZDB files are just SQLite 3 databases with an '.zdb' file extension.
 
+SQLite is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. SQLite is the most widely deployed SQL database engine in the world. The source code for SQLite is in the public domain.
 
-##Command line
+##From the command line
 
-This repository includes a python script ```zdb.py```, which provides the ability to modify ZDB files from the command line.
+This repository includes a python script ```zdb.py```, which provides the ability to modify ZDB files from the command line. This script can be invoked by:
 
+```
+python ./zdb.py [optional arguments]
+```
+###install
 
 To run the script without calling python every time, run the following command (if you're on a unix-like system):
 ```
@@ -16,12 +21,30 @@ sudo chmod 755 zdb.py
 This changes the permission of the script to 'executable'.  You can now run it as:
 
 ```
-./zdb.py [-h] [-zdb ZDBFILE] [-txt TXTFILE]
+./zdb.py [optional arguments]
+```
 
+###usage
+
+The full command-line arguments are:
+
+```
+./zdb.py [-h] [-zdb ZDBFILE] [-txt TXTFILE]
 ```
 The ```-h``` switch will display a help menu about basic command-line usage to the zdb script.
 
-##Matlab
+###adding a sleep score from a TXT
+
+The sleep score column from a TXT file can be merged with a ZDB.  To add a sleep score from a TXT file, use the following syntax when calling ```zdb.py```.
+
+```
+./zdb.py -zdb ZDBFILE.zdb -txt TXTFILE 
+```
+where 'ZDBFILE.zdb' is the name/path of a ZDB file. Likewise 'TXTFILE.txt' is the name of a TXT file.
+
+
+
+##from Matlab
 
 This repository provides Matlab wrappers around some basic functions of SQLite 3's C API.  This allows you to execute SQLite queries on an embedded database.
 
