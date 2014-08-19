@@ -1,13 +1,33 @@
 Read Neuroscore ZDB files in Matlab
 ==============
 
-Neuroscore's ZDB files are just SQLite 3 databases with an '.zdb' file extension.
+
+##Command line
+
+This repository includes a python script ```zdb.py```, which provides the ability to modify ZDB files from the command line.
+
+
+To run the script without calling python every time, run the following command (if you're on a unix-like system):
+```
+sudo chmod 755 zdb.py
+```
+This changes the permission of the script to 'executable'.  You can now run it as:
+
+```
+./zdb.py [-h] [-zdb ZDBFILE] [-txt TXTFILE]
+
+```
+The ```-h``` switch will display a help menu about basic command-line usage to the zdb script.
+
+
+
 
 This repository provides Matlab wrappers around some basic functions of SQLite 3's C API.  This allows you to execute SQLite queries on an embedded database.
 
 
 SQLite is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. SQLite is the most widely deployed SQL database engine in the world. The source code for SQLite is in the public domain.
 
+##Matlab
 
 ###install
  
